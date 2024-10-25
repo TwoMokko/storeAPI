@@ -18,9 +18,9 @@
 					$state ? Response::sendOK($result) : Response::sendError(Response::ERROR_NOT_FOUND, 'Not found');
 					break;
 				case 'POST':
-					$data = $this->prepareData($_POST);
-//					header('content-type: application/json');
-//					$data = $this->prepareData(json_decode(file_get_contents('php://input'), true));
+//					$data = $this->prepareData($_POST);
+					header('content-type: application/json');
+					$data = $this->prepareData(json_decode(file_get_contents('php://input'), true));
 					if (!$this->validation($data)) Response::sendError(Response::ERROR_VALIDATION, 'Unprocessable Entity');
 
 					[$state, $result] = ($id) ? $modelProduct->update($id, $data) : $modelProduct->add($data);
@@ -37,7 +37,7 @@
 		private function validation(array $data): bool
 		{
 			if ($data['name'] === '') return false;
-			if ($data['description'] === '') return false;
+//			if ($data['description'] === '') return false;
 
 			return true;
 		}

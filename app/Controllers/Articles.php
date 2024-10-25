@@ -19,7 +19,7 @@
 					break;
 				case 'POST':
 //					$data = $this->prepareData($_POST);
-					header('content-type: application/json');
+//					header('content-type: application/json');
 					$data = $this->prepareData(json_decode(file_get_contents('php://input')));
 					if (!$this->validation($data)) Response::sendError(Response::ERROR_VALIDATION, 'Unprocessable Entity');
 
